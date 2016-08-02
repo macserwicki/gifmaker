@@ -191,6 +191,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.1803921568627451" green="0.23921568627450979" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Idg-S9-dYE" firstAttribute="centerX" secondItem="pNa-Y5-au7" secondAttribute="centerX" id="AIg-Cn-AfA"/>
                             <constraint firstItem="Hx5-Iw-gBr" firstAttribute="leading" secondItem="pNa-Y5-au7" secondAttribute="leadingMargin" id="E5H-Ol-G63"/>
@@ -200,10 +201,16 @@
                             <constraint firstItem="Idg-S9-dYE" firstAttribute="trailing" secondItem="pNa-Y5-au7" secondAttribute="trailingMargin" id="n2q-Vp-Imz"/>
                             <constraint firstItem="Idg-S9-dYE" firstAttribute="leading" secondItem="pNa-Y5-au7" secondAttribute="leadingMargin" id="nwW-nq-7aP"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Itr-Wn-LFE" appends="YES" id="O6d-o6-6V2"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="98w-hN-q9u">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="kvy-5V-EgW">
                             <color key="tintColor" red="1" green="0.25490196079999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="nextBtnGifPreview:" destination="gN0-HT-VRx" id="EG9-6f-tLb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -212,6 +219,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSQ-pK-rKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Itr-Wn-LFE">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="gN0-HT-VRx" id="EbS-oI-sRH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-135" y="-783.75"/>
         </scene>
@@ -244,6 +256,9 @@
                                         <state key="normal" title="SHARE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareBtnPressed:" destination="cB7-Y1-ZFX" eventType="touchUpInside" id="Cgy-zL-Sat"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoi-MZ-GNH">
                                         <rect key="frame" x="0.0" y="66" width="560" height="50"/>
@@ -255,6 +270,9 @@
                                         <state key="normal" title="CREATE AND SAVE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createAndShareBtnPressed:" destination="cB7-Y1-ZFX" eventType="touchUpInside" id="Yd8-IL-Zz6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -270,6 +288,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="SWX-N6-oaS"/>
+                    <connections>
+                        <outlet property="gifImageView" destination="HQu-c2-zTO" id="vUH-sR-JiL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCC-tI-bRp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

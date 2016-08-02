@@ -12,10 +12,7 @@ import MobileCoreServices
 import ImageIO
 
 
-//MARK: - Constants
-let frameCount = 16
-let delayTime: Float = 0.2
-let loopCount = 0 // 0 means infinity
+
 
 
 //MARK: - UIViewController: UINavigationControllerDelegate

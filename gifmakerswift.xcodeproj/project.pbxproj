@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52D533BB1D4DC0F800A348D3 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D533BA1D4DC0F800A348D3 /* Gif.swift */; };
+		52DC610A1D5131EA00FBF6AF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC61091D5131EA00FBF6AF /* Constants.swift */; };
 		52EA94E11D493EFE00ADF70E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA94E01D493EFE00ADF70E /* AppDelegate.swift */; };
 		52EA94E31D493EFE00ADF70E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA94E21D493EFE00ADF70E /* ViewController.swift */; };
 		52EA94E61D493EFE00ADF70E /* Mainnn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EA94E41D493EFE00ADF70E /* Mainnn.storyboard */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		52D533BA1D4DC0F800A348D3 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		52DC61091D5131EA00FBF6AF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		52EA94DD1D493EFD00ADF70E /* gifmakerswift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gifmakerswift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EA94E01D493EFE00ADF70E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52EA94E21D493EFE00ADF70E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				52EA94FA1D4951E300ADF70E /* GifEditorViewController.swift */,
 				52EA94FC1D49521900ADF70E /* PreviewViewController.swift */,
 				52EA94FE1D4C02D900ADF70E /* UIViewController+Record.swift */,
+				52DC61091D5131EA00FBF6AF /* Constants.swift */,
 				52D533BA1D4DC0F800A348D3 /* Gif.swift */,
 				52EA95061D4C551000ADF70E /* ThirdPartyCode */,
 				52EA94E41D493EFE00ADF70E /* Mainnn.storyboard */,
@@ -193,6 +196,7 @@
 				52EA94FF1D4C02D900ADF70E /* UIViewController+Record.swift in Sources */,
 				52EA94FD1D49521900ADF70E /* PreviewViewController.swift in Sources */,
 				52EA94E11D493EFE00ADF70E /* AppDelegate.swift in Sources */,
+				52DC610A1D5131EA00FBF6AF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
