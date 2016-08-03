@@ -25,6 +25,7 @@ class GifEditorViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         captionTextField.delegate = self
         subscribeToKeyboardNotifications()
+        self.title = "Editor"
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {

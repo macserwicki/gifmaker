@@ -12,10 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var gifs = [Gif]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        
+        
+       // #define GIFURL [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"savedGifs"]
+        //let GIFURL = NSSearchPathForDirectoriesInDomains(<#T##directory: NSSearchPathDirectory##NSSearchPathDirectory#>, <#T##domainMask: NSSearchPathDomainMask##NSSearchPathDomainMask#>, <#T##expandTilde: Bool##Bool#>)
+       // self.gifs = NSKeyedUnarchiver.unarchiveObjectWithFile(GIFURL)
+        
         return true
     }
 

@@ -23,12 +23,7 @@ extension UIViewController: UINavigationControllerDelegate {
 //MARK: - UIViewController: UIImagePickerControllerDelegate
 extension UIViewController: UIImagePickerControllerDelegate {
     @IBAction func launchVideoCamera(sender: AnyObject) {
-        let videoController = UIImagePickerController()
-        videoController.sourceType = .Camera
-        videoController.mediaTypes = [kUTTypeMovie as String]
-        videoController.allowsEditing = false //Change to true later for editing.
-        videoController.delegate = self
-        self.presentViewController(videoController, animated: true, completion: nil)
+       self.launchVideoCamera()
     }
     
     //Allows Editing
@@ -64,14 +59,50 @@ extension UIViewController: UIImagePickerControllerDelegate {
     
     
     func displayGifFromGif(displayGif: Gif) {
-
       //  let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard?.instantiateViewControllerWithIdentifier("GifEditorViewController") as! GifEditorViewController
         vc.gif = displayGif
-        
        navigationController?.pushViewController(vc, animated: true)
     }
 
+    func launchPhotoLibrary() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.mediaTypes = [kUTTypeMovie as String]
+        imagePicker.allowsEditing = false //Change to true later for editing.
+        imagePicker.delegate = self
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func launchVideoCamera() {
+        let videoController = UIImagePickerController()
+        videoController.sourceType = .Camera
+        videoController.mediaTypes = [kUTTypeMovie as String]
+        videoController.allowsEditing = false //Change to true later for editing.
+        videoController.delegate = self
+        self.presentViewController(videoController, animated: true, completion: nil)    }
+    
+    
+    @IBAction func presentVideoOptions() {
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            self.launchPhotoLibrary()
+        } else {
+            //camera or library alert view
+            let alert = UIAlertController(title: "Create New Gif", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let recordVideo = UIAlertAction(title: "Shoot Video", style: UIAlertActionStyle.Default, handler: { action in
+             self.launchVideoCamera()
+            })
+            let pickVideo = UIAlertAction(title: "Choose from Album", style: UIAlertActionStyle.Default, handler: { action in
+            self.launchPhotoLibrary()
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(recordVideo)
+            alert.addAction(pickVideo)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     //End of UIViewController: UIImagePickerControllerDelegate
 }
