@@ -32,9 +32,18 @@ extension UIViewController: UIImagePickerControllerDelegate {
         
         if mediaType == kUTTypeMovie as String {
             let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
-            dismissViewControllerAnimated(true, completion: nil)
-
-            convertVideoToGIF(videoURL)
+            //dismissViewControllerAnimated(true, completion: nil)
+            
+            let start: NSNumber? = info["_UIImagePickerControllerVideoEditingStart"] as? NSNumber
+            let end: NSNumber? = info["_UIImagePickerControllerVideoEditingEnd"] as? NSNumber
+            var duration: NSNumber?
+            if let start = start {
+                duration = NSNumber(float: (end!.floatValue) - (start.floatValue))
+            } else {
+                duration = nil
+            }
+            
+            convertVideoToGIF(videoURL, startTime: start?.floatValue, duration: duration?.floatValue)
            // UISaveVideoAtPathToSavedPhotosAlbum(videoURL.path!, nil, nil, nil)
             //Get Start and End Points From Trimmed Video.
         }
@@ -47,14 +56,30 @@ extension UIViewController: UIImagePickerControllerDelegate {
     
     //MARK: - GIF Converting Methods
     
-    func convertVideoToGIF(videoURL: NSURL) {
-        let regift = Regift(sourceFileURL: videoURL, frameCount: frameCount, delayTime: delayTime, loopCount: loopCount)
-        let gifURL = regift.createGif()
+    func convertVideoToGIF(videoURL: NSURL, startTime: Float?, duration: Float?) {
         
-         let gif = Gif(url: gifURL!, videoURL: videoURL, caption: nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                
+        
+        let regift: Regift
+        
+        if let start = startTime {
+            //Trimmed Video
+             regift = Regift(sourceFileURL: videoURL, destinationFileURL: nil, startTime: start, duration: duration!, frameRate: Int(duration!)*3, loopCount: loopCount)
+            
+        } else {
 
+            //Untrimmed Video
+            regift = Regift(sourceFileURL: videoURL, frameCount: Int(duration!)*3, delayTime: delayTime, loopCount: loopCount)
+        }
         
-        displayGifFromGif(gif)
+        let gifURL = regift.createGif()
+        let gif = Gif(url: gifURL!, videoURL: videoURL, caption: nil)
+        self.displayGifFromGif(gif)
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+        }
+      
     }
     
     
@@ -69,7 +94,7 @@ extension UIViewController: UIImagePickerControllerDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .PhotoLibrary
         imagePicker.mediaTypes = [kUTTypeMovie as String]
-        imagePicker.allowsEditing = false //Change to true later for editing.
+        imagePicker.allowsEditing = true
         imagePicker.delegate = self
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -78,7 +103,7 @@ extension UIViewController: UIImagePickerControllerDelegate {
         let videoController = UIImagePickerController()
         videoController.sourceType = .Camera
         videoController.mediaTypes = [kUTTypeMovie as String]
-        videoController.allowsEditing = false //Change to true later for editing.
+        videoController.allowsEditing = true
         videoController.delegate = self
         self.presentViewController(videoController, animated: true, completion: nil)    }
     
