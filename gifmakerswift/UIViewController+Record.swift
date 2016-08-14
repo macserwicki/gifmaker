@@ -34,16 +34,17 @@ extension UIViewController: UIImagePickerControllerDelegate {
             let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
             //dismissViewControllerAnimated(true, completion: nil)
             
-            let start: NSNumber? = info["_UIImagePickerControllerVideoEditingStart"] as? NSNumber
-            let end: NSNumber? = info["_UIImagePickerControllerVideoEditingEnd"] as? NSNumber
+            let start: Float? = info["_UIImagePickerControllerVideoEditingStart"] as? Float
+            let end: Float? = info["_UIImagePickerControllerVideoEditingEnd"] as? Float
             var duration: NSNumber?
             if let start = start {
-                duration = NSNumber(float: (end!.floatValue) - (start.floatValue))
+                duration = NSNumber(float: (end!) - (start))
             } else {
+                //don't trim
                 duration = nil
             }
             
-            convertVideoToGIF(videoURL, startTime: start?.floatValue, duration: duration?.floatValue)
+            convertVideoToGIF(videoURL, startTime: start, duration: duration?.floatValue)
            // UISaveVideoAtPathToSavedPhotosAlbum(videoURL.path!, nil, nil, nil)
             //Get Start and End Points From Trimmed Video.
         }
@@ -67,10 +68,14 @@ extension UIViewController: UIImagePickerControllerDelegate {
             //Trimmed Video
              regift = Regift(sourceFileURL: videoURL, destinationFileURL: nil, startTime: start, duration: duration!, frameRate: Int(duration!)*3, loopCount: loopCount)
             
+            
         } else {
 
+            
+        
+            
             //Untrimmed Video
-            regift = Regift(sourceFileURL: videoURL, frameCount: Int(duration!)*3, delayTime: delayTime, loopCount: loopCount)
+            regift = Regift(sourceFileURL: videoURL, frameCount: frameCount, delayTime: delayTime, loopCount: loopCount)
         }
         
         let gifURL = regift.createGif()
@@ -180,21 +185,11 @@ extension UIViewController: UIImagePickerControllerDelegate {
         
         
     }
-    //    exporter.outputURL = [NSURL fileURLWithPath:path];
-    //    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    //
-    //    __block NSURL *croppedURL;
-    //
-    //    [exporter exportAsynchronouslyWithCompletionHandler:^(void){
-    //    croppedURL = exporter.outputURL;
-    //    [self convertVideoToGif:croppedURL start:start duration:duration];
-    //    }];
-    //    }
     
     func createPath() throws -> String {
         
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        var documentsDirectory = paths[0]
+        let documentsDirectory = paths[0]
         let manager = NSFileManager.defaultManager()
         var outputURL = documentsDirectory.stringByAppendingString("output")
         do { try manager.createDirectoryAtPath(outputURL, withIntermediateDirectories: true, attributes: nil) } catch {
@@ -202,7 +197,7 @@ extension UIViewController: UIImagePickerControllerDelegate {
         }
         
         //might fail here
-        outputURL.stringByAppendingString("output.mov")
+        outputURL = outputURL.stringByReplacingOccurrencesOfString("output", withString: "output.mov")
         
         //Remove Existing File
         try manager.removeItemAtPath(outputURL)
