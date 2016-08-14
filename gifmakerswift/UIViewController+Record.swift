@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MobileCoreServices
 import ImageIO
-
+import AVFoundation
 
 
 
@@ -127,6 +127,153 @@ extension UIViewController: UIImagePickerControllerDelegate {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
+    
+    
+    
+    
+    func cropVideoToSquare(rawVideoURL: NSURL, start: NSNumber, duration: NSNumber) -> Void {
+        //AVAsset and AVAssetTrack Initialized
+        let videoAsset = AVAsset(URL: rawVideoURL)
+        let videoTrack = videoAsset.tracksWithMediaType(AVMediaTypeVideo)[0]
+        
+        //Cropping To Square
+        let videoComposition = AVMutableVideoComposition()
+        videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height)
+        videoComposition.frameDuration = CMTimeMake(1, 30)
+        
+        let instruction = AVMutableVideoCompositionInstruction()
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
+        
+        //Rotate To Portrait
+        let transformer = AVMutableVideoCompositionLayerInstruction.init(assetTrack: videoTrack)
+        
+        let t1 = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, -(videoTrack.naturalSize.width - videoTrack.naturalSize.height) / 2)
+        let t2 = CGAffineTransformRotate(t1, CGFloat(M_PI_2))
+        
+        let finalTransform: CGAffineTransform = t2
+        
+        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
+        instruction.layerInstructions = [transformer]
+        videoComposition.instructions = [instruction]
+        
+        //Export
+        let exporter = AVAssetExportSession(asset: videoAsset, presetName: AVAssetExportPresetHighestQuality)
+        exporter?.videoComposition = videoComposition
+        
+        var path = ""
+        
+        do {
+            try
+           path = self.createPath()
+        } catch {
+            print("Error creatingPath - createPath()") }
+        
+        
+        exporter?.outputURL = NSURL.fileURLWithPath(path)
+        exporter?.outputFileType = AVFileTypeQuickTimeMovie
+        
+        var croppedURL: NSURL? = nil
+        exporter?.exportAsynchronouslyWithCompletionHandler({ 
+            croppedURL = exporter?.outputURL
+            self.convertVideoToGIF(croppedURL!, startTime: Float(start), duration: Float(duration))
+        })
+        
+        
+    }
+    //    exporter.outputURL = [NSURL fileURLWithPath:path];
+    //    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+    //
+    //    __block NSURL *croppedURL;
+    //
+    //    [exporter exportAsynchronouslyWithCompletionHandler:^(void){
+    //    croppedURL = exporter.outputURL;
+    //    [self convertVideoToGif:croppedURL start:start duration:duration];
+    //    }];
+    //    }
+    
+    func createPath() throws -> String {
+        
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        var documentsDirectory = paths[0]
+        let manager = NSFileManager.defaultManager()
+        var outputURL = documentsDirectory.stringByAppendingString("output")
+        do { try manager.createDirectoryAtPath(outputURL, withIntermediateDirectories: true, attributes: nil) } catch {
+            print("Error occurd when trying to createDirectoryAtPath - createPath()")
+        }
+        
+        //might fail here
+        outputURL.stringByAppendingString("output.mov")
+        
+        //Remove Existing File
+        try manager.removeItemAtPath(outputURL)
+        
+        return outputURL
+    }
+    
+
+    
+//    CGAffineTransform t1 = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, -(videoTrack.naturalSize.width - videoTrack.naturalSize.height) /2 );
+//    CGAffineTransform t2 = CGAffineTransformRotate(t1, M_PI_2);
+//
+//    CGAffineTransform finalTransform = t2;
+//    [transformer setTransform:finalTransform atTime:kCMTimeZero];
+//    instruction.layerInstructions = [NSArray arrayWithObject:transformer];
+//    videoComposition.instructions = [NSArray arrayWithObject: instruction];
+//    
+//    // export
+//    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:videoAsset presetName:AVAssetExportPresetHighestQuality] ;
+//    exporter.videoComposition = videoComposition;
+//    NSString *path = [self createPath];
+    
+    
+//    exporter.outputURL = [NSURL fileURLWithPath:path];
+//    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+//    
+//    __block NSURL *croppedURL;
+//    
+//    [exporter exportAsynchronouslyWithCompletionHandler:^(void){
+//    croppedURL = exporter.outputURL;
+//    [self convertVideoToGif:croppedURL start:start duration:duration];
+//    }];
+//    }
+    
+    
+    
+    
+    //DONE
+    //    -(void)cropVideoToSquare:(NSURL*)rawVideoURL start:(NSNumber*)start duration:(NSNumber*)duration {
+    //    //Create the AVAsset and AVAssetTrack
+    //    AVAsset *videoAsset = [AVAsset assetWithURL:rawVideoURL];
+    //    AVAssetTrack *videoTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    //
+    //    // Crop to square
+    //    AVMutableVideoComposition* videoComposition = [AVMutableVideoComposition videoComposition];
+    //    videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height);
+    //    videoComposition.frameDuration = CMTimeMake(1, 30);
+    //
+    //    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    //    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30) );
+    //
+    //    // rotate to portrait
+    //    AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    //DONE
+    
+    //
+    //    - (NSString*)createPath {
+    //
+    //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString *documentsDirectory = [paths objectAtIndex:0];
+    //    NSFileManager *manager = [NSFileManager defaultManager];
+    //    NSString *outputURL = [documentsDirectory stringByAppendingPathComponent:@"output"] ;
+    //    [manager createDirectoryAtPath:outputURL withIntermediateDirectories:YES attributes:nil error:nil];
+    //    outputURL = [outputURL stringByAppendingPathComponent:@"output.mov"];
+    //
+    //    // Remove Existing File
+    //    [manager removeItemAtPath:outputURL error:nil];
+    //
+    //    return outputURL;
+    //    }
+    
     
     
     //End of UIViewController: UIImagePickerControllerDelegate
