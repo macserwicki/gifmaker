@@ -25,6 +25,7 @@
 		52EA950F1D4DA05700ADF70E /* RegiftCaption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA950E1D4DA05700ADF70E /* RegiftCaption.swift */; };
 		52EA95111D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA95101D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift */; };
 		52EA95131D4DABA800ADF70E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EA95121D4DABA800ADF70E /* Main.storyboard */; };
+		52EC6F6F1D6241FE00AC6AD7 /* SavedGifsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		52EA950E1D4DA05700ADF70E /* RegiftCaption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegiftCaption.swift; sourceTree = "<group>"; };
 		52EA95101D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetImageGeneratorTimePoints.swift; sourceTree = "<group>"; };
 		52EA95121D4DABA800ADF70E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedGifsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				52EA94FA1D4951E300ADF70E /* GifEditorViewController.swift */,
 				52EA94FC1D49521900ADF70E /* PreviewViewController.swift */,
 				52EA94FE1D4C02D900ADF70E /* UIViewController+Record.swift */,
+				52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */,
 				52DC61091D5131EA00FBF6AF /* Constants.swift */,
 				52D533BA1D4DC0F800A348D3 /* Gif.swift */,
 				52EA95061D4C551000ADF70E /* ThirdPartyCode */,
@@ -195,6 +198,7 @@
 				52EA950F1D4DA05700ADF70E /* RegiftCaption.swift in Sources */,
 				52EA94FF1D4C02D900ADF70E /* UIViewController+Record.swift in Sources */,
 				52EA94FD1D49521900ADF70E /* PreviewViewController.swift in Sources */,
+				52EC6F6F1D6241FE00AC6AD7 /* SavedGifsViewController.swift in Sources */,
 				52EA94E11D493EFE00ADF70E /* AppDelegate.swift in Sources */,
 				52DC610A1D5131EA00FBF6AF /* Constants.swift in Sources */,
 			);
