@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol PreviewViewControllerProtocol {
+    func previewVC(preview: PreviewViewController, didSaveGif gif: Gif)
+}
+
+
 class PreviewViewController: UIViewController {
 
+    
     var gif: Gif? = nil
     
     @IBOutlet weak var gifImageView: UIImageView!
@@ -32,31 +38,40 @@ class PreviewViewController: UIViewController {
     }
     
     
-    @IBAction func createAndShareBtnPressed(sender: UIButton) {
-        
-        // Copy GIF data from temporary URL
-        let url = self.gif?.url
-        self.gif?.gifData = NSData.init(contentsOfURL: url!)
-        
-        // Save updated Gif object to Gif array model
-      //  let appDelegate = UIApplication.sharedApplication().delegate
-      //  appDelegate.gifs.append(self.gif)
-        
-        
-        /*
-         // Copy GIF data from temporary URL
-         self.gif.gifData = [NSData dataWithContentsOfURL:self.gif.url];
-         
-         // Save updated Gif object to Gif array model
-         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-         [appDelegate.gifs addObject:self.gif];
-         
-         [self.navigationController popToRootViewControllerAnimated:YES];
-
- 
-    */
-        
+    @IBAction func createAndSaveBtnPressed(sender: UIButton) {
+        createAndSave()
     }
+    
+    func createAndSave() {
+        savedGifs.append(self.gif!)
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+//    @IBAction func createAndSaveBtnPressed(sender: UIButton) {
+//        
+//        // Copy GIF data from temporary URL
+//        let url = self.gif?.url
+//        self.gif?.gifData = NSData.init(contentsOfURL: url!)
+//        
+//        // Save updated Gif object to Gif array model
+//      //  let appDelegate = UIApplication.sharedApplication().delegate
+//      //  appDelegate.gifs.append(self.gif)
+//        
+//        
+//        /*
+//         // Copy GIF data from temporary URL
+//         self.gif.gifData = [NSData dataWithContentsOfURL:self.gif.url];
+//         
+//         // Save updated Gif object to Gif array model
+//         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//         [appDelegate.gifs addObject:self.gif];
+//         
+//         [self.navigationController popToRootViewControllerAnimated:YES];
+//
+// 
+//    */
+//        
+//    }
     
     
     override func viewDidLoad() {

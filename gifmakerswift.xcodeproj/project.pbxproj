@@ -26,6 +26,8 @@
 		52EA95111D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA95101D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift */; };
 		52EA95131D4DABA800ADF70E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EA95121D4DABA800ADF70E /* Main.storyboard */; };
 		52EC6F6F1D6241FE00AC6AD7 /* SavedGifsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */; };
+		52EC6F711D625F0C00AC6AD7 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC6F701D625F0C00AC6AD7 /* GifCell.swift */; };
+		52EC6F731D6399DC00AC6AD7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC6F721D6399DC00AC6AD7 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		52EA95101D4DA05D00ADF70E /* AVAssetImageGeneratorTimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetImageGeneratorTimePoints.swift; sourceTree = "<group>"; };
 		52EA95121D4DABA800ADF70E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedGifsViewController.swift; sourceTree = "<group>"; };
+		52EC6F701D625F0C00AC6AD7 /* GifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
+		52EC6F721D6399DC00AC6AD7 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +94,9 @@
 				52EA94FE1D4C02D900ADF70E /* UIViewController+Record.swift */,
 				52EC6F6E1D6241FE00AC6AD7 /* SavedGifsViewController.swift */,
 				52DC61091D5131EA00FBF6AF /* Constants.swift */,
+				52EC6F701D625F0C00AC6AD7 /* GifCell.swift */,
 				52D533BA1D4DC0F800A348D3 /* Gif.swift */,
+				52EC6F721D6399DC00AC6AD7 /* DetailViewController.swift */,
 				52EA95061D4C551000ADF70E /* ThirdPartyCode */,
 				52EA94E41D493EFE00ADF70E /* Mainnn.storyboard */,
 				52EA95121D4DABA800ADF70E /* Main.storyboard */,
@@ -190,6 +196,7 @@
 			files = (
 				52EA950D1D4DA05100ADF70E /* Regift.swift in Sources */,
 				52EA94FB1D4951E300ADF70E /* GifEditorViewController.swift in Sources */,
+				52EC6F711D625F0C00AC6AD7 /* GifCell.swift in Sources */,
 				52EA94F91D4951B500ADF70E /* WelcomeViewController.swift in Sources */,
 				52EA94E31D493EFE00ADF70E /* ViewController.swift in Sources */,
 				52D533BB1D4DC0F800A348D3 /* Gif.swift in Sources */,
@@ -199,6 +206,7 @@
 				52EA94FF1D4C02D900ADF70E /* UIViewController+Record.swift in Sources */,
 				52EA94FD1D49521900ADF70E /* PreviewViewController.swift in Sources */,
 				52EC6F6F1D6241FE00AC6AD7 /* SavedGifsViewController.swift in Sources */,
+				52EC6F731D6399DC00AC6AD7 /* DetailViewController.swift in Sources */,
 				52EA94E11D493EFE00ADF70E /* AppDelegate.swift in Sources */,
 				52DC610A1D5131EA00FBF6AF /* Constants.swift in Sources */,
 			);

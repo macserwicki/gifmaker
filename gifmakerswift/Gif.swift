@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Gif: NSObject {
+class Gif: NSObject, NSCoding {
 
     var url: NSURL? = nil
     var videoURL: NSURL? = nil
@@ -20,7 +20,7 @@ class Gif: NSObject {
         self.caption = caption
         self.videoURL = videoURL
         self.url = url
-        self.gifData = nil
+        self.gifData = NSData(contentsOfURL: url)
         self.gifImage = UIImage.gifWithURL(url.absoluteString)
     }
     
@@ -32,5 +32,22 @@ class Gif: NSObject {
         self.gifImage = UIImage.gifWithData(data)
     }
     
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.url = aDecoder.decodeObjectForKey("url") as? NSURL
+        self.caption = aDecoder.decodeObjectForKey("caption") as! String
+        self.videoURL = aDecoder.decodeObjectForKey("videoURL") as? NSURL
+        self.gifImage = aDecoder.decodeObjectForKey("gifImage") as? UIImage
+        self.gifData = aDecoder.decodeObjectForKey("gifData") as? NSData
+
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.url, forKey: "url")
+        aCoder.encodeObject(self.caption, forKey: "caption")
+        aCoder.encodeObject(self.videoURL, forKey: "videoURL")
+        aCoder.encodeObject(self.gifImage, forKey: "gifImage")
+    }
     
 }
